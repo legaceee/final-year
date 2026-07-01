@@ -3,4 +3,7 @@ node_modules
 .env
 dist/
 
-/src/generated/prisma
+# Generated Prisma Client files/directories
+/generated/
+
+
