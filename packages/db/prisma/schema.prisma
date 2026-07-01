@@ -11,4 +11,8 @@ model user {
   id       Int    @id @default(autoincrement())
   username String
   password String
+  email String @unique
+  isVerified Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
