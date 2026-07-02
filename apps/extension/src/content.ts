@@ -1,4 +1,7 @@
 console.log("Amazon review loaded");
+console.log(window.location.href);
+
+console.log(document.body.innerHTML.includes("review"));
 const reviews = document.querySelectorAll('[data-hook="review"]');
 type rev={
     title:string,

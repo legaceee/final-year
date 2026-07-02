@@ -9,7 +9,8 @@ const manifest: ManifestV3Export = {
     {
       matches: [
         "https://www.amazon.in/*",
-        "https://www.amazon.com/*"
+        "https://www.amazon.com/*",
+        "https://www.flipkart.com/*"
       ],
       js: ["src/content.ts"]
     }
