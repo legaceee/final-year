@@ -13,10 +13,10 @@ const extractedReviews:rev[] = [];
 reviews.forEach((review) => {
 
     const title =
-        review.querySelector('[data-hook="review-title"]')?.textContent?.trim() ?? "";
+        review.querySelector('[data-hook="reviewTitle"]')?.textContent?.trim() ?? "";
 
     const body =
-        review.querySelector('[data-hook="review-body"]')?.textContent?.trim() ?? "";
+        review.querySelector('[data-hook="reviewText"]')?.textContent?.trim() ?? "";
 
     const rating =
         review.querySelector('[data-hook="review-star-rating"]')?.textContent?.trim() ?? "";
