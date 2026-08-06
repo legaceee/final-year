@@ -6,6 +6,7 @@ print(df.head())
 print("\nshape")
 print(df.shape)
 print("\nColumns")
+print(df.columns)
 print("\nMissing values")
 print(df.isnull().sum())
 
