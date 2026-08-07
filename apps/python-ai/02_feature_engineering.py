@@ -1,5 +1,5 @@
 import pandas as pd
 
-df=pd.read_csv("../dataset/raw/final_labeled_fake_reviews.csv")
-
-print(df[df["label"]==1])
+df=pd.read_csv("../dataset/processed/reviews_clean.csv")
+df["review_length"]=df["review"].str.len()
+print(df["review_length"])
