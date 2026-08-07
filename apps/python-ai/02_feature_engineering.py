@@ -6,3 +6,4 @@ print(df[["review", "review_length"]].head())
 print(df.columns.tolist())
 df["word_count"]=df["review"].str.split().str.len()
 print(df["word_count"].head())
+df["sentence_count"]=df["review"].str.split(".").str.len
