@@ -1,7 +1,7 @@
 import pandas as pd
 def analyze_sentences(text):
-    sentence_count=0
-    excalamtion_count=0
+    sentence_count=1
+    exclamtion_count=0
     prev=False
 
     for char in text:
@@ -9,11 +9,11 @@ def analyze_sentences(text):
             if not prev:
                 sentence_count+=1
             if char=="!":
-                excalamtion_count+=1
+                exclamtion_count+=1
             prev=True    
         else:
             prev=False 
-    return sentence_count,excalamtion_count    
+    return sentence_count,exclamtion_count    
 df=pd.read_csv("../dataset/processed/reviews_clean.csv")
 df["review_length"]=df["review"].str.len()
 print(df[["review", "review_length"]].head())
@@ -25,7 +25,9 @@ df[["sentence_count", "exclamation_count"]] = (
     .apply(analyze_sentences)
     .apply(pd.Series)
 )
-print(df["exclamation count"])
+print(df["exclamation_count"].head(10))
+print("\nsentence_count:")
+print(df["sentence_count"].head(10))
 
 # review_length
 # word_count
