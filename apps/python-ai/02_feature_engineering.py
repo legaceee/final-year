@@ -15,7 +15,20 @@ def analyze_sentences(text):
             prev=False 
     if sentence_count==0:
         sentence_count=1
-    return sentence_count,exclamtion_count    
+    return sentence_count,exclamtion_count   
+
+def uppercase_ratio(text):
+     uppercase_count=0
+     character_count=0
+     for char in text:
+         if char.isupper():
+             uppercase_count+=1
+             character_count+=1
+         elif char.isalpha():
+              character_count+=1
+     if character_count==0:
+         return 0         
+     return uppercase_count/character_count
 df=pd.read_csv("../dataset/processed/reviews_clean.csv")
 df["review_length"]=df["review"].str.len()
 print(df[["review", "review_length"]].head())
@@ -30,6 +43,9 @@ df[["sentence_count", "exclamation_count"]] = (
 print(df["exclamation_count"].head(10))
 print("\nsentence_count:")
 print(df["sentence_count"].head(10))
+
+df["uppercase_ratio"]=df["review"].apply(uppercase_ratio)
+print(df["uppercase_ratio"].head(10))
 
 # review_length
 # word_count
