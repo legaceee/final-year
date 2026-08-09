@@ -29,23 +29,33 @@ def uppercase_ratio(text):
      if character_count==0:
          return 0         
      return uppercase_count/character_count
+
+def punctuation_ratio(text):
+    
 df=pd.read_csv("../dataset/processed/reviews_clean.csv")
 df["review_length"]=df["review"].str.len()
-print(df[["review", "review_length"]].head())
-print(df.columns.tolist())
+
 df["word_count"]=df["review"].str.split().str.len()
-print(df["word_count"].head())
+
 df[["sentence_count", "exclamation_count"]] = (
     df["review"]
     .apply(analyze_sentences)
     .apply(pd.Series)
 )
-print(df["exclamation_count"].head(10))
-print("\nsentence_count:")
-print(df["sentence_count"].head(10))
+
 
 df["uppercase_ratio"]=df["review"].apply(uppercase_ratio)
-print(df["uppercase_ratio"].head(10))
+print(
+    df.groupby("label")[
+        [
+            "review_length",
+            "word_count",
+            "sentence_count",
+            "exclamation_count",
+            "uppercase_ratio"
+        ]
+    ].mean()
+)
 
 # review_length
 # word_count
