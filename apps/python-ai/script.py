@@ -44,15 +44,32 @@ import pandas as pd
 
 df = pd.read_csv("../dataset/raw/final_labeled_fake_reviews.csv")
 
-print("Actual NaN:")
-print(df["text"].isna().sum())
+# print("Actual NaN:")
+# print(df["text"].isna().sum())
 
-print("\nLiteral 'nan':")
-print((df["text"].astype(str).str.lower() == "nan").sum())
+# print("\nLiteral 'nan':")
+# print((df["text"].astype(str).str.lower() == "nan").sum())
 
-print("\nRows:")
+# print("\nRows:")
+# print(
+#     df[df["text"].astype(str).str.lower() == "nan"]
+#     [["title", "text"]]
+#     .head(40)
+# )
 print(
-    df[df["text"].astype(str).str.lower() == "nan"]
-    [["title", "text"]]
-    .head(40)
+    df.groupby("label")["verified_purchase"]
+      .mean()
+)
+print(
+    pd.crosstab(
+        df["verified_purchase"],
+        df["label"],
+        normalize="index"
+    )
+)
+print(
+    pd.crosstab(
+        df["verified_purchase"],
+        df["label"]
+    )
 )
