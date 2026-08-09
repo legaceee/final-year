@@ -1,6 +1,6 @@
 import pandas as pd
 def analyze_sentences(text):
-    sentence_count=1
+    sentence_count=0
     exclamtion_count=0
     prev=False
 
@@ -13,6 +13,8 @@ def analyze_sentences(text):
             prev=True    
         else:
             prev=False 
+    if sentence_count==0:
+        sentence_count=1
     return sentence_count,exclamtion_count    
 df=pd.read_csv("../dataset/processed/reviews_clean.csv")
 df["review_length"]=df["review"].str.len()
