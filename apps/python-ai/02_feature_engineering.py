@@ -1,4 +1,5 @@
 import pandas as pd
+import string
 def analyze_sentences(text):
     sentence_count=0
     exclamtion_count=0
@@ -31,7 +32,17 @@ def uppercase_ratio(text):
      return uppercase_count/character_count
 
 def punctuation_ratio(text):
-    
+    punctuation_count=0
+    word_count=0
+    for char in text:
+        if char in string.punctuation:
+            punctuation_count+=1
+            word_count+=1
+        elif char.isalnum():
+            word_count+=1   
+    if word_count==0:
+        return 0
+    return punctuation_count/word_count       
 df=pd.read_csv("../dataset/processed/reviews_clean.csv")
 df["review_length"]=df["review"].str.len()
 
