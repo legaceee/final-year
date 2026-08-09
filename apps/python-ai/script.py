@@ -32,21 +32,7 @@ df=pd.read_csv("../dataset/raw/final_labeled_fake_reviews.csv")
 
 # print("\nRows per user:")
 # print(other["user_id"].value_counts().head(20))
-def analyze_sentences(text):
-    sentence_count=0
-    excalamtion_count=0
-    prev=False
-
-    for char in text:
-        if char=="!" and prev:
-            excalamtion_count+=1
-        elif char=="!":
-            sentence_count+=1
-            excalamtion_count+=1
-            prev=True
-        else:
-            prev=False 
-    return sentence_count,excalamtion_count            
+        
 user_counts=df["user_id"].value_counts()
 df["user_review_count"]=df["user_id"].map(user_counts)
 
