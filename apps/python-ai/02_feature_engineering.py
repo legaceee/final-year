@@ -44,18 +44,22 @@ def punctuation_ratio(text):
         return 0
     return punctuation_count/word_count       
 df=pd.read_csv("../dataset/processed/reviews_clean.csv")
-df["review_length"]=df["review"].str.len()
+print(df[df["text"].isna()][["title", "text"]].to_string())
+print(df[df["text"].isna()]["title"].head(30).tolist())
+# df = df.dropna(subset=["title", "text"])
+df["style_text"] = df["title"] + " " + df["text"]
+df["review_length"]=df["style_text"].str.len()
 
-df["word_count"]=df["review"].str.split().str.len()
+df["word_count"]=df["style_text"].str.split().str.len()
 
 df[["sentence_count", "exclamation_count"]] = (
-    df["review"]
+    df["style_text"]
     .apply(analyze_sentences)
     .apply(pd.Series)
 )
 
 
-df["uppercase_ratio"]=df["review"].apply(uppercase_ratio)
+df["uppercase_ratio"]=df["style_text"].apply(uppercase_ratio)
 print(
     df.groupby("label")[
         [
@@ -67,7 +71,8 @@ print(
         ]
     ].mean()
 )
-
+df["punctuation_ratio"]=df["style_text"].apply(punctuation_ratio)
+print(df["punctuation_ratio"].head(10))
 # review_length
 # word_count
 # sentence_count

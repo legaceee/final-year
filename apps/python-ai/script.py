@@ -1,5 +1,5 @@
-import pandas as pd
-df=pd.read_csv("../dataset/raw/final_labeled_fake_reviews.csv")
+# import pandas as pd
+# df=pd.read_csv("../dataset/raw/final_labeled_fake_reviews.csv")
 # print("user review burst:")
 # print(df["user_review_burst"].describe())
 
@@ -33,9 +33,26 @@ df=pd.read_csv("../dataset/raw/final_labeled_fake_reviews.csv")
 # print("\nRows per user:")
 # print(other["user_id"].value_counts().head(20))
         
-user_counts=df["user_id"].value_counts()
-df["user_review_count"]=df["user_id"].map(user_counts)
+# user_counts=df["user_id"].value_counts()
+# df["user_review_count"]=df["user_id"].map(user_counts)
 
-print(df[["user_id","user_review_count","label"]].head(20))
+# print(df[["user_id","user_review_count","label"]].head(20))
 
-print(df.groupby("label")["user_review_count"].agg(["mean","median","max"]))
+# print(df.groupby("label")["user_review_count"].agg(["mean","median","max"]))
+
+import pandas as pd
+
+df = pd.read_csv("../dataset/raw/final_labeled_fake_reviews.csv")
+
+print("Actual NaN:")
+print(df["text"].isna().sum())
+
+print("\nLiteral 'nan':")
+print((df["text"].astype(str).str.lower() == "nan").sum())
+
+print("\nRows:")
+print(
+    df[df["text"].astype(str).str.lower() == "nan"]
+    [["title", "text"]]
+    .head(40)
+)

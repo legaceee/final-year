@@ -15,8 +15,15 @@ df = df[
     ]
 ]
 df = df.dropna(subset=["title", "text"])
+
 df["title"] = df["title"].astype(str).str.strip()
 df["text"] = df["text"].astype(str).str.strip()
+
+# Remove empty title/text
+df = df[
+    (df["title"] != "") &
+    (df["text"] != "")
+]
 df["review"] = (
     "[TITLE] "
     + df["title"]
@@ -28,10 +35,12 @@ df = df[
     df["review"].str.split().str.len() >= 5
 ]
 df = df.reset_index(drop=True)
+
 df.to_csv(
     OUTPUT_FILE,
     index=False
 )
+
 print("=" * 40)
 print("Dataset Cleaning Complete")
 print("=" * 40)
@@ -41,6 +50,8 @@ print(f"Total Reviews : {len(df)}")
 print("\nLabel Distribution")
 
 print(df["label"].value_counts())
+
+
 
 print("\nSaved to:")
 
