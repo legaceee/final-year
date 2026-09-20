@@ -89,3 +89,13 @@ print(
       .agg(["mean", "median", "max"])
 )
 print(df.columns.tolist())
+print("\nUser review burst statistics:")
+print(
+    df.groupby("label")["user_review_burst"]
+      .agg(["count", "mean", "median", "min", "max"])
+)
+print("\nMissing values:")
+print(df["user_review_burst"].isna().sum())
+
+print("\nBurst value distribution:")
+print(df["user_review_burst"].value_counts().head(20))
