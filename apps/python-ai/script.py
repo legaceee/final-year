@@ -61,15 +61,31 @@ print(
       .mean()
 )
 print(
+    df.groupby("label")["rating"]
+      .agg(["mean", "median"])
+)
+print(
     pd.crosstab(
-        df["verified_purchase"],
+        df["rating"],
         df["label"],
         normalize="index"
     )
 )
+# print(
+#     pd.crosstab(
+#         df["verified_purchase"],
+#         df["label"],
+#         normalize="index"
+#     )
+# )
+# print(
+#     pd.crosstab(
+#         df["verified_purchase"],
+#         df["label"]
+#     )
+# )
 print(
-    pd.crosstab(
-        df["verified_purchase"],
-        df["label"]
-    )
+    df.groupby("label")["helpful_vote"]
+      .agg(["mean", "median", "max"])
 )
+print(df.columns.tolist())
