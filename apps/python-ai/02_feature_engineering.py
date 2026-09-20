@@ -176,3 +176,13 @@ print(
         feature_columns + ["label"]
     ].head(10)
 )
+
+OUTPUT_FILE = "../dataset/processed/reviews_features.csv"
+
+df.to_csv(
+    OUTPUT_FILE,
+    index=False
+)
+
+print("\nFeature dataset saved to:")
+print(OUTPUT_FILE)
